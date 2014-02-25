@@ -165,15 +165,12 @@ return {
 {DIGIT}+  { // NOTE: the following computation of the integer value does NOT
             //       check for overflow.  This must be changed.
             double d = (new Double(yytext())).doubleValue();
-            int val;
-            if (d > (double) Integer.MAX_VALUE){
-               val = Integer.MAX_VALUE;
-               ErrMsg.warn(yyline+1, CharNum.num, "integer literal too large; using max value");
-            } else {
-               val = (int) d;
-            }
 
-            Symbol S = new Symbol(sym.INTLITERAL, new IntLitTokenVal(yyline+1, CharNum.num,  val));
+            if (d > (double) Integer.MAX_VALUE)
+               ErrMsg.warn(yyline+1, CharNum.num, "integer literal too large; using max value");
+
+            int val = (int) Math.min(d, (double) Integer.MAX_VALUE);
+            Symbol S = new Symbol(sym.INTLITERAL, new IntLitTokenVal(yyline+1, CharNum.num, val));
             CharNum.num += yytext().length();
             return S;
           }
