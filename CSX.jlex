@@ -80,58 +80,59 @@ bool {
 	CharNum.num += yytext().length();
 	return S;
 	}
+
 int {
 	Symbol S = new Symbol(sym.INT, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
 }
-void{
+void {
 	Symbol S = new Symbol(sym.VOID, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
 }
 
-true{
+true {
 	Symbol S = new Symbol(sym.TRUE, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
 }
-false{
+false {
 	Symbol S = new Symbol(sym.FALSE, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
 }
-struct{
+struct {
 	Symbol S = new Symbol(sym.STRUCT, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
 }
-cin{
+cin {
 	Symbol S = new Symbol(sym.CIN, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
 }
-cout{
+cout {
 	Symbol S = new Symbol(sym.COUT, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
-} 
-if{
+}
+if {
 	Symbol S = new Symbol(sym.IF, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
-} 
-else{
+}
+else {
 	Symbol S = new Symbol(sym.ELSE, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
-}  
-while{
+}
+while {
 	Symbol S = new Symbol(sym.WHILE, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
-} 
-return{
+}
+return {
 	Symbol S = new Symbol(sym.RETURN, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
@@ -143,17 +144,24 @@ return{
 	return S;
 }
 
-"(\\(n|t|"|\\|'|[?])|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])*" {
+\"(\\(n|t|\"|\\|'|[?])|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])*\" {
             String val = yytext();
             Symbol S = new Symbol(sym.STRINGLITERAL, new
                            StrLitTokenVal(yyline+1, CharNum.num, val));
             CharNum.num += yytext().length();
             return S;
             }
-"(\\(n|t|"|\\|'|[?])|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])*{
+
+\"(\\(.)|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])*\" {
+  ErrMsg.fatal(yyline+1, CharNum.num, "string literal with bad escaped character ignored");
+  CharNum.num += yytext().length();
+}
+
+\"(\\(n|t|\"|\\|'|[?])|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])* {
           ErrMsg.fatal(yyline+1, CharNum.num, "unterminated string literal ignored");
           CharNum.num += yytext().length();
 }
+
 {DIGIT}+  { // NOTE: the following computation of the integer value does NOT
             //       check for overflow.  This must be changed.
             int val = (new Integer(yytext())).intValue();
@@ -162,14 +170,14 @@ return{
                              new IntLitTokenVal(yyline+1, CharNum.num, Integer.MAX_VALUE));
                               ErrMsg.warn(yyline+1, CharNum.num, "integer literal too large; using max value");
                              CharNum.num += ((String)(Integer.MAX_VALUE)).length();
-                            
+
             }else{
                         Symbol S = new Symbol(sym.INTLITERAL,
                              new IntLitTokenVal(yyline+1, CharNum.num, val));
                              CharNum.num += yytext().length();
             }
 
-            
+
             return S;
           }
 
@@ -225,7 +233,7 @@ return{
    CharNum.num += yytext().length();
    return S;
    }
-   
+
 ">"">"  {
    Symbol S = new Symbol(sym.CIN, new TokenVal(yyline+1, CharNum.num));
    CharNum.num += yytext().length();
@@ -328,16 +336,12 @@ return{
    return S;
    }
 
-          
+
 ("//"|"#").* {
 		CharNum.num += yytext().length();
 }
-("\")(^("n"|"t"|"""|"'"|"\")).*{
-  ErrMsg.fatal(yyline+1, CharNum.num, "string literal with bad escaped character ignored");
-  CharNum.num += yytext().length();
-}
-.{ ErrMsg.fatal(yyline+1, CharNum.num,
+
+. { ErrMsg.fatal(yyline+1, CharNum.num,
                          "ignoring illegal character: " + yytext());
             CharNum.num++;
 }
-
