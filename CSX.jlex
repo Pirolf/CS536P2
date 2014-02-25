@@ -222,13 +222,13 @@ return {
    }
 
 "<""<"  {
-   Symbol S = new Symbol(sym.COUT, new TokenVal(yyline+1, CharNum.num));
+   Symbol S = new Symbol(sym.WRITE, new TokenVal(yyline+1, CharNum.num));
    CharNum.num += yytext().length();
    return S;
    }
 
 ">"">"  {
-   Symbol S = new Symbol(sym.CIN, new TokenVal(yyline+1, CharNum.num));
+   Symbol S = new Symbol(sym.READ, new TokenVal(yyline+1, CharNum.num));
    CharNum.num += yytext().length();
    return S;
    }
