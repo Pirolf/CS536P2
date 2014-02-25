@@ -170,6 +170,156 @@ return{
             return S;
           }
 
+\{ {
+   Symbol S = new Symbol(sym.LCURLY, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+\} {
+   Symbol S = new Symbol(sym.RCURLY, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+\( {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+   
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+      return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
+CHAR  {
+   Symbol S = new Symbol(sym.REPLACE, new TokenVal(yyline+1, CharNum.num));
+   CharNum.num += yytext().length();
+   return S;
+   }
+
 \n        { CharNum.num = 1; }
 
 {WHITESPACE}+  { CharNum.num += yytext().length(); }
