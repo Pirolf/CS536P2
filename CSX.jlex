@@ -332,10 +332,7 @@ CHAR  {
             return S;
           }
         
-.         { ErrMsg.fatal(yyline+1, CharNum.num,
-                         "ignoring illegal character: " + yytext());
-            CharNum.num++;
-          }
+
           
 ("//"|"#").* {
 		CharNum.num += yytext().length();
@@ -343,5 +340,9 @@ CHAR  {
 ("\")(^("n"|"t"|"""|"'"|"\")).*{
   ErrMsg.fatal(yyline+1, CharNum.num, "string literal with bad escaped character ignored");
   CharNum.num += yytext().length();
+}
+.{ ErrMsg.fatal(yyline+1, CharNum.num,
+                         "ignoring illegal character: " + yytext());
+            CharNum.num++;
 }
 
