@@ -143,6 +143,13 @@ return{
 	return S;
 }
 
+"(\\(n|t|"|\\|'|[?])|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])*" {
+            String val = yytext();
+            Symbol S = new Symbol(sym.STRINGLITERAL, new
+                           StrLitTokenVal(yyline+1, CharNum.num, val));
+            CharNum.num += yytext().length();
+            return S;
+            }
 
 {DIGIT}+  { // NOTE: the following computation of the integer value does NOT
             //       check for overflow.  This must be changed.
