@@ -80,7 +80,7 @@ bool {
 	CharNum.num += yytext().length();
 	return S;
 	}
-int{
+int {
 	Symbol S = new Symbol(sym.INT, new TokenVal(yyline+1, CharNum.num));
 	CharNum.num += yytext().length();
 	return S;
