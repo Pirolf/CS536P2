@@ -150,7 +150,10 @@ return{
             CharNum.num += yytext().length();
             return S;
             }
-
+"(\\(n|t|"|\\|'|[?])|[\000-\011]|[\013-\041]|[\043-\133]|[\135-\177])*{
+          ErrMsg.fatal(yyline+1, CharNum.num, "unterminated string literal ignored");
+          CharNum.num += yytext().length();
+}
 {DIGIT}+  { // NOTE: the following computation of the integer value does NOT
             //       check for overflow.  This must be changed.
             int val = (new Integer(yytext())).intValue();
@@ -337,5 +340,8 @@ CHAR  {
 ("//"|"#").* {
 		CharNum.num += yytext().length();
 }
-
+("\")(^("n"|"t"|"""|"'"|"\")).*{
+  ErrMsg.fatal(yyline+1, CharNum.num, "string literal with bad escaped character ignored");
+  CharNum.num += yytext().length();
 }
+
