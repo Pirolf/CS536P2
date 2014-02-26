@@ -68,6 +68,7 @@ public class P2 {
 		// Adjust line position
 		while (currLine < targetLine) {
 			outFile.println();
+			currChar = 1;
 			currLine++;
 		}
 
