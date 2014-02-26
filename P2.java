@@ -23,7 +23,7 @@ public class P2 {
      *
      * Open and read from file allTokens.txt
      * For each token read, write the corresponding string to allTokens.out
-     * If the input file contains all tokens, one per line, we can verify
+     * If the input file contains all tokens, multiple per line, we can verify
      * correctness of the scanner by comparing the input and output files
      * (e.g., using a 'diff' command).
      */
@@ -45,138 +45,165 @@ public class P2 {
         // create and call the scanner
         Yylex scanner = new Yylex(inFile);
         Symbol token = scanner.next_token();
+	// initialize line & char position
+	int currLine = 1;
+	int currChar = 1;
         while (token.sym != sym.EOF) {
-            outFile.println(tokStr(token));
-				token = scanner.next_token();
+		// Adjust position (more accurate recreation of inFile)
+            	posAdj(outFile, token, currLine, currChar);
+		String str = tokStr(token);
+		outFile.print(str);
+		// Set new line & char values
+		currLine = ((TokenVal)token.value).linenum;
+		currChar = str.length() + ((TokenVal)token.value).charnum;
+		token = scanner.next_token();
         } // end while
         outFile.close();
    }
 
-	private static String tokStr(Symbol token) {
-			switch (token.sym) {
+   // Adjusts position of output file
+   private static void posAdj (PrintWriter outFile, Symbol token, int currLine, int currChar) {
+		int targetLine = ((TokenVal)token.value).linenum;
+		int targetChar = ((TokenVal)token.value).charnum;
+		// Adjust line position
+		while (currLine < targetLine) {
+			outFile.println();
+			currLine++;
+		}
+
+		// Adjust character position
+		while (currChar < targetChar) {
+			outFile.print(" ");
+			currChar++;
+		}
+   }
+   
+   // Converts symbol into its original representation
+   private static String tokStr(Symbol token) {
+      switch (token.sym) {
             case sym.BOOL:
-                return "bool";
+               return "bool";
 
 	    case sym.INT:
-                return "int";
+               return "int";
 
             case sym.VOID:
-                return "void";
+               return "void";
 
             case sym.TRUE:
-                return "true";
+               return "true";
 
             case sym.FALSE:
-                return "false";
+               return "false";
 
             case sym.STRUCT:
-                return "struct";
+               return "struct";
 
             case sym.CIN:
-                return "cin";
+               return "cin";
 
             case sym.COUT:
-                return "cout";
+               return "cout";
 
             case sym.IF:
-                return "if";
+               return "if";
 
             case sym.ELSE:
-                return "else";
+               return "else";
 
             case sym.WHILE:
-                return "while";
+               return "while";
 
             case sym.RETURN:
-                return "return";
+               return "return";
 
             case sym.ID:
-                return ((IdTokenVal)token.value).idVal;
+               return ((IdTokenVal)token.value).idVal;
 
             case sym.INTLITERAL:
-                return String.valueOf(((IntLitTokenVal)token.value).intVal);
+               return String.valueOf(((IntLitTokenVal)token.value).intVal);
 
             case sym.STRINGLITERAL:
-                return ((StrLitTokenVal)token.value).strVal;
+               return ((StrLitTokenVal)token.value).strVal;
 
             case sym.LCURLY:
-                return "{";
+               return "{";
 
             case sym.RCURLY:
-                return "}";
+               return "}";
 
             case sym.LPAREN:
-                return "(";
+               return "(";
 
             case sym.RPAREN:
-                return ")";
+               return ")";
 
             case sym.SEMICOLON:
-                return ";";
+               return ";";
 
             case sym.COMMA:
-                return ",";
+               return ",";
 
             case sym.DOT:
-                return ".";
+               return ".";
 
             case sym.WRITE:
-                return "<<";
+               return "<<";
 
             case sym.READ:
-                return ">>";
+               return ">>";
 
             case sym.PLUSPLUS:
-                return "++";
+               return "++";
 
             case sym.MINUSMINUS:
-                return "--";
+               return "--";
 
             case sym.PLUS:
-                return "+";
+               return "+";
 
-            case sym.MINUS:
-                return "-";
+	    case sym.MINUS:
+	       return "-";
 
-            case sym.TIMES:
-                return "*";
+	    case sym.TIMES:
+	       return "*";
 
-            case sym.DIVIDE:
-                return "/";
+	    case sym.DIVIDE:
+	    	return "/";
 
-            case sym.NOT:
-                return "!";
+	    case sym.NOT:
+	    	return "!";
 
-            case sym.AND:
-                return "&&";
+	    case sym.AND:
+	    	return "&&";
 
-            case sym.OR:
-                return "||";
+	    case sym.OR:
+	    	return "||";
 
-            case sym.EQUALS:
-                return "==";
+	    case sym.EQUALS:
+	    	return "==";
 
-            case sym.NOTEQUALS:
-                return "!=";
+	    case sym.NOTEQUALS:
+	    	return "!=";
 
-            case sym.LESS:
-                return "<";
+	    case sym.LESS:
+	    	return "<";
 
-            case sym.GREATER:
-                return ">";
+	    case sym.GREATER:
+	    	return ">";
 
-            case sym.LESSEQ:
-                return "<=";
+	    case sym.LESSEQ:
+	    	return "<=";
 
-            case sym.GREATEREQ:
-                return ">=";
+	    case sym.GREATEREQ:
+	    	return ">=";
 
-			case sym.ASSIGN:
-                return "=";
+	    case sym.ASSIGN:
+               return "=";
 
-		default:
-			return "UNKNOWN TOKEN";
-            } // end switch
-	}
+	    default:
+	       return "UNKNOWN TOKEN";
+      } // end switch
+   }
 
 }
