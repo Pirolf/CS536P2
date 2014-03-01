@@ -28,3 +28,7 @@ struct test {
 // { } ( ) ; , . << >> ++ -- + - * / ! && || == != < > <= >= =
 // string and int lits in comments
 // "Hello" 1234
+
+// Integers w/ leading zeros
+0123
+000123
