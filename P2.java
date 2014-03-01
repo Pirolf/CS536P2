@@ -81,6 +81,9 @@ public class P2 {
 			currChar = str.length() + ((TokenVal)token.value).charnum;
 			token = scanner.next_token();
 		} // end while
+		
+		// Place newline char at end of file (no weird diff output) and close
+		outFile.print("\n");
 		outFile.close();
 	}
 
