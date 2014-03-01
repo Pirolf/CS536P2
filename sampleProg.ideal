@@ -1,0 +1,24 @@
+
+
+int a = 123;
+
+
+bool b = true;
+bool c = false;
+
+
+if (b) {
+   cout >> "b";
+} else {
+   cout >> "not b";
+}
+
+
+while (c) {
+   int x = 15;
+}
+
+
+struct test {
+   int d;
+}
