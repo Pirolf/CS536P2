@@ -1,3 +1,10 @@
-"blabla\aj"
-#$
+"blabla\aj BAD ESCAPECHAR"
 182358716871236726736726
+"This is an okay string, just need to make sure it can both recognise good ones amongst bad..."
+"Below are a few invalid characters..."
+\
+?
+@
+"unterminated
+"another unterminated \"
+"unterminated at EOF
