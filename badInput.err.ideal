@@ -1,8 +1,8 @@
-string literal with bad escaped character ignored
-integer literal too large; using max value
-illegal character ignored: \
-illegal character ignored: ?
-illegal character ignored: @
-unterminated string literal ignored
-unterminated string literal ignored
-unterminated string literal ignored
+1:1 ***ERROR*** string literal with bad escaped character ignored
+2:1 ***WARNING*** integer literal too large; using max value
+5:1 ***ERROR*** illegal character ignored: \
+6:1 ***ERROR*** illegal character ignored: ?
+7:1 ***ERROR*** illegal character ignored: @
+8:1 ***ERROR*** unterminated string literal ignored
+9:1 ***ERROR*** unterminated string literal ignored
+10:1 ***ERROR*** unterminated string literal ignored
